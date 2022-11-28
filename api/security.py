@@ -19,13 +19,13 @@ def validate_token(http_authorization_credentials=Depends(reusable_oauth2)) -> s
     """
     try:
         payload = jwt.decode(http_authorization_credentials.credentials, SECRET_KEY, algorithms=[SECURITY_ALGORITHM])
-        # print(payload)
-        userid = str(payload.get('userid'))
-        try:
-            with open(r"C:/Users/Lenovo/PycharmProjects/Otani_intern/fastapi-postgresql-crud/web/src/components/user.txt", "w") as f:
-                f.write(userid)
-        except Exception as e:
-            print(e)
+        print(payload)
+        # userid = str(payload.get('userid'))
+        # try:
+        #     with open(r"C:/Users/Lenovo/PycharmProjects/Otani_intern/fastapi-postgresql-crud/web/src/components/user.txt", "w") as f:
+        #         f.write(userid)
+        # except Exception as e:
+        #     print(e)
 
         # print(userid)
         # if payload.get('username') < int(datetime.now()):

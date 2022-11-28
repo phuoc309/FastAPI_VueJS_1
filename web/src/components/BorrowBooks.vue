@@ -183,9 +183,11 @@
 
 <script>
   import axios from 'axios'
-  import user from './user.txt'
+  // import user from './user.txt'
+  import jwt_Decode from "jwt-decode";
  // import BookForm from './BookForm.vue'
  var token
+  var user_id
  var axiosHeaders
   export default {
     name: 'book-user',
@@ -306,7 +308,9 @@
                 );
       },
       borrowBook () {
-        let user_id = Number(user)
+        user_id = jwt_Decode(localStorage.getItem('token')).userid
+        console.log(user_id)
+        // let user_id = Number(user)
         token = JSON.parse( localStorage.getItem('token') );
         axiosHeaders = {headers: {
                         'Content-Type': 'application/json',
@@ -370,7 +374,7 @@
               this.editedItem.quantity -= 1;
               let request_body = {
                   "book_id": this.editedItem.id,
-                  "user_id": Number(user),
+                  "user_id": user_id,
               };
 
               axios.post('http://127.0.0.1:8000/add_borrow', request_body, axiosHeaders)
